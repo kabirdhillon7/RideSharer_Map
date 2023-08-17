@@ -19,14 +19,6 @@ class MapViewController: UIViewController {
         
         if CLLocationManager.locationServicesEnabled() {
             checkLocationAuthorization()
-        } else {
-            let alert = UIAlertController(title: "Authorization Denied",
-                                          message: "Please turn on location permission",
-                                          preferredStyle: .alert)
-            let okAlert = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(okAlert)
-            
-            self.present(alert, animated: true)
         }
     }
     
@@ -35,26 +27,26 @@ class MapViewController: UIViewController {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
         case .denied:
-            let alert = UIAlertController(title: "Authorization Denied",
-                                          message: "Please turn on location permission",
-                                          preferredStyle: .alert)
-            let okAlert = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(okAlert)
-            
-            present(alert, animated: true)
+            presentDeniedAccessAlert()
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             mapView.showsUserLocation = true
-        case .restricted: // Show an alert letting them know what’s up
-            let alert = UIAlertController(title: "Authorization Denied",
-                                          message: "Please turn on location permission",
-                                          preferredStyle: .alert)
-            let okAlert = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(okAlert)
-            
-            present(alert, animated: true)
+        case .restricted:
+            presentDeniedAccessAlert()
         case .authorizedAlways:
             break
+        @unknown default:
+            break
         }
+    }
+    
+    func presentDeniedAccessAlert() {
+        let alert = UIAlertController(title: "Authorization Denied",
+                                      message: "Please turn on location permission",
+                                      preferredStyle: .alert)
+        let okAlert = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAlert)
+        
+        present(alert, animated: true)
     }
 }
