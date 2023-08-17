@@ -31,7 +31,7 @@ class MapViewController: UIViewController {
     }
     
     func checkLocationAuthorization() {
-        switch locationManager.authorizationStatus {
+        switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
         case .denied:
@@ -43,15 +43,8 @@ class MapViewController: UIViewController {
             
             present(alert, animated: true)
         case .notDetermined:
-            let alert = UIAlertController(title: "Authorization Denied",
-                                          message: "Please turn on location permission",
-                                          preferredStyle: .alert)
-            let okAlert = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(okAlert)
-            
-            present(alert, animated: true){
-                self.locationManager.requestWhenInUseAuthorization()
-            }
+            locationManager.requestWhenInUseAuthorization()
+            mapView.showsUserLocation = true
         case .restricted: // Show an alert letting them know what’s up
             let alert = UIAlertController(title: "Authorization Denied",
                                           message: "Please turn on location permission",
