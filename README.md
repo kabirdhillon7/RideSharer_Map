@@ -2,6 +2,8 @@
 
 RideSharer Map is an iOS app that allows users to view their current location on a map.
 
+This iOS app was apart of a project I completed for [Lyft](https://www.lyft.com)'s [Mobile Engineering Virtual Experience Program](https://www.theforage.com/virtual-internships/prototype/z5WMH5vehnwDferzi/Lyft-Mobile-Engineering-Virtual-Experience-Program).
+
 ## Table of Contents
 
 - [Requirements](#requirements)
